@@ -1,4 +1,4 @@
-# 🚀 Multi-Agent Autonomous Price-Drop Scout
+# 🚀 ScoutPulse: Multi-Agent Autonomous Price-Drop Scout
 
 A production-ready, ₹0-cost autonomous multi-agent price drop scout built with **LangGraph**, **Google Gemini (`gemini-2.5-flash`)**, **Tavily AI**, and **Streamlit**.
 
