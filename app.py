@@ -48,7 +48,7 @@ with st.sidebar:
     with st.form("add_product_form", clear_on_submit=True):
         item_name = st.text_input("Product Name", placeholder="e.g. Sony WH-1000XM5")
         target_price = st.number_input("Target Budget (₹)", min_value=1.0, value=15000.0, step=500.0)
-        if st.form_submit_button("Add to Watchlist", use_container_width=True):
+        if st.form_submit_button("Add to Watchlist", width="stretch"):
             if item_name.strip():
                 database.add_item(item_name.strip(), target_price)
                 st.success("Added product!")
@@ -69,7 +69,7 @@ with st.sidebar:
             nt = st.text_input("TAVILY_API_KEY", value=tk if not tk.startswith("your_") else "", type="password")
             ntt = st.text_input("TELEGRAM_BOT_TOKEN", value=tt if not tt.startswith("your_") else "", type="password")
             ntc = st.text_input("TELEGRAM_CHAT_ID", value=tc if not tc.startswith("your_") else "")
-            if st.form_submit_button("Save", use_container_width=True):
+            if st.form_submit_button("Save", width="stretch"):
                 if not os.path.exists(env_path):
                     with open(env_path, "w") as f: f.write("")
                 if ng: set_key(env_path, "GEMINI_API_KEY", ng)
@@ -81,7 +81,7 @@ with st.sidebar:
                 st.rerun()
 
     st.markdown("---")
-    if st.button("Send Test Telegram Alert", use_container_width=True):
+    if st.button("Send Test Telegram Alert", width="stretch"):
         token = os.getenv("TELEGRAM_BOT_TOKEN", "")
         chat = os.getenv("TELEGRAM_CHAT_ID", "")
         if not token or token.startswith("your_") or not chat or chat.startswith("your_"):
@@ -148,11 +148,11 @@ with t1:
                 with col_s:
                     st.markdown(f"**Status:**\n`{item['status']}`")
                 with col_a1:
-                    if st.button("Re-check", key=f"rew_{item['id']}", use_container_width=True):
+                    if st.button("Re-check", key=f"rew_{item['id']}", width="stretch"):
                         database.reset_item_status(item["id"])
                         st.rerun()
                 with col_a2:
-                    if st.button("Remove", key=f"del_{item['id']}", type="secondary", use_container_width=True):
+                    if st.button("Remove", key=f"del_{item['id']}", type="secondary", width="stretch"):
                         database.delete_item(item["id"])
                         st.rerun()
                 st.divider()
@@ -178,7 +178,7 @@ with t2:
             if sel_item and sel_item["target_price_inr"] > 0:
                 fig.add_hline(y=sel_item["target_price_inr"], line_dash="dash", line_color="#F59E0B", annotation_text="Target Budget")
             fig.update_layout(plot_bgcolor="#111827", paper_bgcolor="#111827", font_family="Inter")
-            st.plotly_chart(fig, use_container_width=True)
+            st.plotly_chart(fig, width="stretch")
 
 with t3:
     st.subheader("Multi-Agent Pipeline Execution Timeline")
